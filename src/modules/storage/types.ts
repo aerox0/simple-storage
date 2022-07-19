@@ -1,14 +1,11 @@
 import fs from 'fs'
 
-export abstract class SimpleFileStorage {
+export class SimpleFileStorageStream {
 	file_path: string
 
 	constructor(file_path: string) {
 		this.file_path = file_path
 	}
-
-	abstract load(): Promise<void>
-	abstract save(): Promise<void>
 
 	async createStorageFile(data: string = ''): Promise<any> {
 		const dir_path = this.file_path.split('/').slice(0, -1).join('/')

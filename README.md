@@ -58,7 +58,7 @@ export class StorageXaml<T extends {}> extends SimpleFileStorage {
 	}
 
 	async save(): Promise<void> {
-		this.createStorageFile(XAML.stringify(this.data))
+		await this.createStorageFile(XAML.stringify(this.data))
 		return
 	}
 }
