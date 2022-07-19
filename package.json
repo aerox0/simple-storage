@@ -1,6 +1,6 @@
 {
 	"name": "@aerox0/simple-file-storage",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"description": "This is a simple file storage package that helps you to save data into file in formats like plaintext, json, yaml. Fully supports typescript.",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
