@@ -1,7 +1,7 @@
-import { SimpleFileStorage } from './types'
+import { SimpleFileStorageBase } from './base'
 const yaml = require('yaml')
 
-export class SimpleFileStorageYaml<T extends {}> extends SimpleFileStorage {
+export class SimpleFileStorageYaml<T extends {}> extends SimpleFileStorageBase<T> {
 	data: T
 
 	/**
@@ -13,13 +13,11 @@ export class SimpleFileStorageYaml<T extends {}> extends SimpleFileStorage {
 		this.data = data
 	}
 
-	async load(): Promise<void> {
-		this.data = yaml.parse(await this.readStorageFile())
-		return
+	async parseData(data_str: string): Promise<T> {
+		return yaml.parse(data_str)
 	}
 
-	async save(): Promise<void> {
-		this.createStorageFile(yaml.stringify(this.data))
-		return
+	async stringifyData(data: T): Promise<string> {
+		return yaml.stringify(data)
 	}
 }

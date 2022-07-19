@@ -1,6 +1,6 @@
-import { SimpleFileStorage } from './types'
+import { SimpleFileStorageBase } from './base'
 
-export class SimpleFileStoragePlaintext extends SimpleFileStorage {
+export class SimpleFileStoragePlaintext extends SimpleFileStorageBase<string> {
 	data: string
 
 	/**
@@ -12,13 +12,11 @@ export class SimpleFileStoragePlaintext extends SimpleFileStorage {
 		this.data = data
 	}
 
-	async load(): Promise<void> {
-		this.data = await this.readStorageFile()
-		return
+	async parseData(data_str: string): Promise<string> {
+		return data_str
 	}
 
-	async save(): Promise<void> {
-		this.createStorageFile(this.data)
-		return
+	async stringifyData(data: string): Promise<string> {
+		return data
 	}
 }

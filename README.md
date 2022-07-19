@@ -9,7 +9,9 @@ To use YAML formatter you have to install "yaml" package.
 ### Basic example:
 
 ```ts
-import { SimpleFileStorageYaml } from '@aerox0/simple-file-storage/modules/yaml'
+// import { SimpleFileStoragePlaintext } from ...
+// import { SimpleFileStorageJson } from ...
+// import { SimpleFileStorageYaml } from ...
 
 const yaml = new SimpleFileStorageYaml('public/storage.yaml', { text: 'Hello' })
 yaml.data.text += ' World'
@@ -18,9 +20,27 @@ const yaml = new SimpleFileStorageYaml<{ text: string }>('public/storage.yaml')
 yaml.data.text = 'Hello World'
 
 await yaml.save() // will create file with passed data
-await yaml.load() // will overwrite this.data with data from file
+await yaml.load() // will overwrite yaml.data with data from file, you usually calling this before assign any data
 
 console.log(yaml.data.text) // Hello World
+```
+
+### Using middleware:
+
+```ts
+const json = new SimpleFileStorageJson('public/storage.json', { text: '' })
+
+json.middleware.use((data) => {
+	if (data.text.length < 1) throw Error('Data.text can not be empty.')
+}) // you can add as many as you want
+
+await json.validate() // we can validate manually
+await json.validate({ text: "It's OK" }) // or validate custom data before assign them to json.data
+
+await json.save() // save and load automatically validate data before applying next changes
+await json.load()
+
+console.log(json.data)
 ```
 
 ### Save data with dynamic file path example:
@@ -37,12 +57,10 @@ for (int i = 10; i <= 10; i++) {
 
 ## Advanced
 
-You can add support for any format you want by extending "SimpleFileStorage" abstract class.
+You can add support for any format you want by extending "SimpleFileStorageBase" abstract class.
 
 ```ts
-import { SimpleFileStorage } from '@aerox0/simple-file-storage/modules/types'
-
-export class StorageXaml<T extends {}> extends SimpleFileStorage {
+export class StorageXaml<T extends {}> extends SimpleFileStorageBase {
 	data: T
 
 	constructor(file_path: string, data = {} as T) {
@@ -50,14 +68,12 @@ export class StorageXaml<T extends {}> extends SimpleFileStorage {
 		this.data = data
 	}
 
-	async load(): Promise<void> {
-		this.data = XAML.parse(await this.readStorageFile())
-		return
+	async stringifyData(data: T): Promise<string> {
+		return XAML.stringify(data)
 	}
 
-	async save(): Promise<void> {
-		this.createStorageFile(XAML.stringify(this.data))
-		return
+	async parseData(data_str: string): Promise<T> {
+		return XAML.parse(data_str)
 	}
 }
 

@@ -1,6 +1,6 @@
-import { SimpleFileStorage } from './types'
+import { SimpleFileStorageBase } from './base'
 
-export class SimpleFileStorageJson<T extends {}> extends SimpleFileStorage {
+export class SimpleFileStorageJson<T extends {}> extends SimpleFileStorageBase<T> {
 	data: T
 
 	/**
@@ -12,13 +12,11 @@ export class SimpleFileStorageJson<T extends {}> extends SimpleFileStorage {
 		this.data = data
 	}
 
-	async load(): Promise<void> {
-		this.data = JSON.parse(await this.readStorageFile())
-		return
+	async stringifyData(data: T): Promise<string> {
+		return JSON.stringify(data)
 	}
 
-	async save(): Promise<void> {
-		this.createStorageFile(JSON.stringify(this.data))
-		return
+	async parseData(data_str: string): Promise<T> {
+		return JSON.parse(data_str)
 	}
 }

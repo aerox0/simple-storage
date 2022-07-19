@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});Object.defineProperty(exports,"SimpleFileStorageMiddleware",{enumerable:true,get:()=>SimpleFileStorageMiddleware});class SimpleFileStorageMiddleware{use(middleware){this.list.push(middleware)}async run(data){for(const middleware of this.list){await middleware(data)}}constructor(){this.list=[]}}
