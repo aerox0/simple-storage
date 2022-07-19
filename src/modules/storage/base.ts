@@ -8,9 +8,10 @@ export abstract class SimpleFileStorageBase<T> {
 	private data_str: string = ''
 	private stream: SimpleFileStorageStream
 
-	constructor(file_path: string) {
+	constructor(file_path: string, data: T) {
 		this.middleware = new SimpleFileStorageMiddleware<T>()
 		this.stream = new SimpleFileStorageStream(file_path)
+		this.data = data
 	}
 
 	abstract stringifyData(data: T): Promise<string>

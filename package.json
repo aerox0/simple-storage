@@ -1,6 +1,6 @@
 {
 	"name": "@aerox0/simple-file-storage",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"description": "This is a simple file storage package that helps you to save data into file in formats like plaintext, json, yaml. Fully supports typescript.",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -14,6 +14,9 @@
 		"bump": "standard-version --skip.tag",
 		"release": "git flow release start",
 		"pubpush": "git flow release finish"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"files": [
 		"dist"
@@ -35,6 +38,7 @@
 		"standard-version": "^9.5.0",
 		"typescript": "^4.7.4"
 	},
+	"dependencies": {},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/aerox0/simple-file-storage.git"
