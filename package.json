@@ -13,7 +13,8 @@
 		"dev": "concurrently \"npm run build:watch\" \"npm run start:dev\"",
 		"bump": "standard-version --skip.tag",
 		"release": "git flow release start",
-		"pubpush": "git flow release finish"
+		"pubpush": "git flow release finish",
+		"package": "npm run build && npm pack"
 	},
 	"publishConfig": {
 		"access": "public"
