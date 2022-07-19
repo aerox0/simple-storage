@@ -19,9 +19,6 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"files": [
-		"dist"
-	],
 	"config": {
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"
