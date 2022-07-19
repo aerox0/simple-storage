@@ -60,12 +60,9 @@ for (int i = 10; i <= 10; i++) {
 You can add support for any format you want by extending "SimpleFileStorageBase" abstract class.
 
 ```ts
-export class StorageXaml<T extends {}> extends SimpleFileStorageBase {
-	data: T
-
+export class StorageXaml<T extends {}> extends SimpleFileStorageBase<T> {
 	constructor(file_path: string, data = {} as T) {
-		super(file_path)
-		this.data = data
+		super(file_path, data)
 	}
 
 	async stringifyData(data: T): Promise<string> {
