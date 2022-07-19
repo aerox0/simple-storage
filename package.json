@@ -1,6 +1,6 @@
 {
 	"name": "@aerox0/simple-file-storage",
-	"version": "1.2.3",
+	"version": "1.2.5",
 	"description": "This is a simple file storage package that helps you to save data into file in formats like plaintext, json, yaml. Fully supports typescript.",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -19,6 +19,9 @@
 	"publishConfig": {
 		"access": "public"
 	},
+	"files": [
+		"dist"
+	],
 	"config": {
 		"commitizen": {
 			"path": "./node_modules/cz-conventional-changelog"
