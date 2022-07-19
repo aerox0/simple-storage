@@ -1,5 +1,5 @@
 import { SimpleFileStorageMiddleware } from './middleware'
-import { SimpleFileStorageStream } from './types'
+import { SimpleFileStorageStream } from './stream'
 
 export abstract class SimpleFileStorageBase<T> {
 	file_path: string
@@ -15,11 +15,6 @@ export abstract class SimpleFileStorageBase<T> {
 
 	abstract stringifyData(data: T): Promise<string>
 	abstract parseData(data_str: string): Promise<T>
-
-	async use(middleware: (data: T) => Promise<void>): Promise<void> {
-		this.middleware.use(middleware)
-		return
-	}
 
 	async load(): Promise<void> {
 		await this.load_str()
