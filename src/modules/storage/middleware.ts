@@ -1,11 +1,11 @@
 export class SimpleFileStorageMiddleware<T> {
-	list: ((data: T) => Promise<void>)[]
+	list: ((data: T) => Promise<void> | void)[]
 
 	constructor() {
 		this.list = []
 	}
 
-	use(middleware: (data: T) => Promise<void>): void {
+	use(middleware: (data: T) => Promise<void> | void): void {
 		this.list.push(middleware)
 	}
 

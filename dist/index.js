@@ -1,1 +1,1 @@
-"use strict"
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});const _yaml=require("./modules/storage/yaml");const main=async()=>{const yaml=new _yaml.SimpleFileStorageYaml("public/storage.yaml");yaml.middleware.use(data=>{if(data.text==="Hello World")throw new Error("Invalid data")});yaml.data.text="Hello World";await yaml.validate();console.log(yaml.data)};main().catch(err=>{throw new Error(err)})

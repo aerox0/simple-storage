@@ -4,8 +4,8 @@ import { SimpleFileStorageStream } from './stream'
 export abstract class SimpleFileStorageBase<T> {
 	file_path: string
 	data: T
+	middleware: SimpleFileStorageMiddleware<T>
 	private data_str: string = ''
-	private middleware: SimpleFileStorageMiddleware<T>
 	private stream: SimpleFileStorageStream
 
 	constructor(file_path: string) {
