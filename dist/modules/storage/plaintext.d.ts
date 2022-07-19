@@ -1,7 +1,7 @@
-import { SimpleFileStorage } from './types';
-export declare class SimpleFileStoragePlaintext extends SimpleFileStorage {
+import { SimpleFileStorageBase } from './base';
+export declare class SimpleFileStoragePlaintext extends SimpleFileStorageBase<string> {
     data: string;
     constructor(file_path: string, data?: string);
-    load(): Promise<void>;
-    save(): Promise<void>;
+    parseData(data_str: string): Promise<string>;
+    stringifyData(data: string): Promise<string>;
 }
