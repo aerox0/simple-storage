@@ -1,3 +1,7 @@
+export * from './modules/storage/plaintext'
+export * from './modules/storage/yaml'
+export * from './modules/storage/json'
+export * from './modules/storage/base'
 // import { SimpleFileStorageYaml } from './modules/storage/yaml'
 
 // const main = async () => {
