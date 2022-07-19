@@ -1,7 +1,7 @@
-import { SimpleFileStorage } from './types';
-export declare class SimpleFileStorageJson<T extends {}> extends SimpleFileStorage {
+import { SimpleFileStorageBase } from './base';
+export declare class SimpleFileStorageJson<T extends {}> extends SimpleFileStorageBase<T> {
     data: T;
     constructor(file_path: string, data?: T);
-    load(): Promise<void>;
-    save(): Promise<void>;
+    stringifyData(data: T): Promise<string>;
+    parseData(data_str: string): Promise<T>;
 }

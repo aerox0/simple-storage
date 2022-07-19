@@ -1,7 +1,7 @@
-import { SimpleFileStorage } from './types';
-export declare class SimpleFileStorageYaml<T extends {}> extends SimpleFileStorage {
+import { SimpleFileStorageBase } from './base';
+export declare class SimpleFileStorageYaml<T extends {}> extends SimpleFileStorageBase<T> {
     data: T;
     constructor(file_path: string, data?: T);
-    load(): Promise<void>;
-    save(): Promise<void>;
+    parseData(data_str: string): Promise<T>;
+    stringifyData(data: T): Promise<string>;
 }
