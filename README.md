@@ -9,6 +9,8 @@ To use YAML formatter you have to install "yaml" package.
 ### Basic example:
 
 ```ts
+import { SimpleFileStoragePlaintext } from '@aerox0/simple-file-storage/modules/plaintext'
+import { SimpleFileStorageJson } from '@aerox0/simple-file-storage/modules/json'
 import { SimpleFileStorageYaml } from '@aerox0/simple-file-storage/modules/yaml'
 
 const yaml = new SimpleFileStorageYaml('public/storage.yaml', { text: 'Hello' })
