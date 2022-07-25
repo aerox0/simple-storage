@@ -6,6 +6,16 @@ To use YAML formatter you have to install "yaml" package.
 
 ## How to use
 
+## Installation:
+
+```
+<!-- With npm -->
+npm install @aerox/simple-file-storage
+
+<!-- With yarn -->
+yarn add @aerox0@/simple-file-storage
+```
+
 ### Basic example:
 
 ```ts
@@ -55,7 +65,7 @@ for (int i = 10; i <= 10; i++) {
 }
 ```
 
-## Advanced
+### Create custom formatter
 
 You can add support for any format you want by extending "SimpleFileStorageBase" abstract class.
 
