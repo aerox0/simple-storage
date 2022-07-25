@@ -7,15 +7,15 @@ export class SimpleFileStorageStream {
 		this.file_path = file_path
 	}
 
-	async createStorageFile(data: string = ''): Promise<any> {
+	async init(data: string = ''): Promise<void> {
 		const dir_path = this.file_path.split('/').slice(0, -1).join('/')
-
-		if (fs.existsSync(this.file_path)) {
+		if (!fs.existsSync(this.file_path)) {
+			await fs.promises.mkdir(dir_path, { recursive: true })
 			await fs.promises.writeFile(this.file_path, data, { flag: 'w' })
-			return
 		}
+	}
 
-		await fs.promises.mkdir(dir_path, { recursive: true })
+	async writeStorageFile(data: string = ''): Promise<any> {
 		await fs.promises.writeFile(this.file_path, data, { flag: 'w' })
 		return
 	}

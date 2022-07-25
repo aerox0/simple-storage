@@ -13,13 +13,13 @@ To use YAML formatter you have to install "yaml" package.
 // import { SimpleFileStorageJson } from ...
 // import { SimpleFileStorageYaml } from ...
 
-const yaml = new SimpleFileStorageYaml('public/storage.yaml', { text: 'Hello' })
+const yaml = await new SimpleFileStorageYaml('public/storage.yaml', { text: 'Hello' }).init() // init will create path with file that contains text: 'Hello'
 yaml.data.text += ' World'
 // --- OR ---
-const yaml = new SimpleFileStorageYaml<{ text: string }>('public/storage.yaml')
+const yaml = await new SimpleFileStorageYaml<{ text: string }>('public/storage.yaml').init() // init will create path with empty file
 yaml.data.text = 'Hello World'
 
-await yaml.save() // will create file with passed data
+await yaml.save() // will save data into file
 await yaml.load() // will overwrite yaml.data with data from file, you usually calling this before assign any data
 
 console.log(yaml.data.text) // Hello World
@@ -28,11 +28,11 @@ console.log(yaml.data.text) // Hello World
 ### Using middleware:
 
 ```ts
-const json = new SimpleFileStorageJson('public/storage.json', { text: '' })
+const json = await new SimpleFileStorageJson('public/storage.json', { text: '' }).init()
 
 json.middleware.use((data) => {
 	if (data.text.length < 1) throw Error('Data.text can not be empty.')
-}) // you can add as many as you want
+}) // you can add as many middlewares as you want
 
 await json.validate() // we can validate manually
 await json.validate({ text: "It's OK" }) // or validate custom data before assign them to json.data
@@ -46,12 +46,12 @@ console.log(json.data)
 ### Save data with dynamic file path example:
 
 ```ts
-const yaml = new SimpleFileStorageYaml<{ id: number }>('public/storage.yaml')
+const yaml = await new SimpleFileStorageYaml<{ id: number }>('public/storage.yaml').init() // will create empty public/storage.yaml file
 
 for (int i = 10; i <= 10; i++) {
 	yaml.file_path = `public/${i}.yaml`
 	yaml.data.id = i
-	await yaml.save()
+	await yaml.init() // will create public/${i}.yaml file with data {id: i}
 }
 ```
 
@@ -74,5 +74,5 @@ export class StorageXaml<T extends {}> extends SimpleFileStorageBase<T> {
 	}
 }
 
-const xaml = new StorageXaml('public/storage.xaml', { text: 'Hello World' })
+const xaml = await new StorageXaml('public/storage.xaml', { text: 'Hello World' }).init()
 ```
