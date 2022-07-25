@@ -1,12 +1,12 @@
 # Description
 
-This is a simple file storage package that helps you to save data into file in formats like plaintext, json, yaml. Fully supports typescript.
+This is a simple file storage package that helps you to save data into file in formats like plaintext, json, yaml or even create your own formatter. Fully supports typescript.
 
 To use YAML formatter you have to install "yaml" package.
 
 ## How to use
 
-## Installation:
+### Installation:
 
 ```
 <!-- With npm -->
