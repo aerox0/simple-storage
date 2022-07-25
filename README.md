@@ -6,7 +6,7 @@ To use YAML formatter you have to install "yaml" package.
 
 ## How to use
 
-## Installation:
+### Installation:
 
 ```
 <!-- With npm -->
