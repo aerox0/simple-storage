@@ -2,21 +2,15 @@ export * from './modules/storage/plaintext'
 export * from './modules/storage/yaml'
 export * from './modules/storage/json'
 export * from './modules/storage/base'
-// import { SimpleFileStorageYaml } from './modules/storage/yaml'
+
+// import { SimpleFileStoragePlaintext } from './modules/storage/plaintext'
 
 // const main = async () => {
-// 	const yaml = new SimpleFileStorageYaml<{ text: string }>('public/storage.yaml')
-// 	yaml.middleware.use((data) => {
-// 		if (data.text === 'Hello World') throw new Error('Invalid data')
-// 	})
+// 	const plaintext = await new SimpleFileStoragePlaintext('public/storage.txt').init()
+// 	await plaintext.load()
 
-// 	yaml.data.text = 'Hello World'
-
-// 	await yaml.validate()
-
-// 	await yaml.save()
-// 	await yaml.load()
-// 	console.log(yaml.data)
+// 	await plaintext.save()
+// 	console.log(plaintext.data)
 // }
 
 // main().catch((err) => {

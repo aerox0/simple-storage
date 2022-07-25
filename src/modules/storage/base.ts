@@ -2,16 +2,21 @@ import { SimpleFileStorageMiddleware } from './middleware'
 import { SimpleFileStorageStream } from './stream'
 
 export abstract class SimpleFileStorageBase<T> {
+	private data_str: string = ''
+	private stream: SimpleFileStorageStream
 	file_path: string
 	data: T
 	middleware: SimpleFileStorageMiddleware<T>
-	private data_str: string = ''
-	private stream: SimpleFileStorageStream
 
 	constructor(file_path: string, data: T) {
 		this.middleware = new SimpleFileStorageMiddleware<T>()
 		this.stream = new SimpleFileStorageStream(file_path)
 		this.data = data
+	}
+
+	async init(): Promise<this> {
+		await this.stream.init(await this.stringifyData(this.data))
+		return this
 	}
 
 	abstract stringifyData(data: T): Promise<string>
@@ -48,7 +53,7 @@ export abstract class SimpleFileStorageBase<T> {
 	}
 
 	private async save_str(): Promise<void> {
-		await this.stream.createStorageFile(this.data_str)
+		await this.stream.writeStorageFile(this.data_str)
 		return
 	}
 }
