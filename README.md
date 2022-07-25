@@ -10,10 +10,10 @@ To use YAML formatter you have to install "yaml" package.
 
 ```
 <!-- With npm -->
-npm install @aerox/simple-file-storage
+npm install @aerox0/simple-file-storage
 
 <!-- With yarn -->
-yarn add @aerox0@/simple-file-storage
+yarn add @aerox0/simple-file-storage
 ```
 
 ### Basic example:
