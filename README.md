@@ -1,19 +1,19 @@
 # Description
 
-This is a simple file storage package that helps you to save data into file in formats like plaintext, json, yaml. Fully supports typescript.
+This is a simple file storage package that helps you to save data into file in formats like plaintext, json, yaml or even create your own formatter. Fully supports typescript.
 
 To use YAML formatter you have to install "yaml" package.
 
 ## How to use
 
-## Installation:
+### Installation:
 
 ```
 <!-- With npm -->
-npm install @aerox/simple-file-storage
+npm install @aerox0/simple-file-storage
 
 <!-- With yarn -->
-yarn add @aerox0@/simple-file-storage
+yarn add @aerox0/simple-file-storage
 ```
 
 ### Basic example:
