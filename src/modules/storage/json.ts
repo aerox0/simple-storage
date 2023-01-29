@@ -1,6 +1,6 @@
-import { SimpleFileStorageBase } from './base'
+import { SimpleFsBase } from './base'
 
-export class SimpleFileStorageJson<T extends {}> extends SimpleFileStorageBase<T> {
+export class SimpleFsJson<T extends {}> extends SimpleFsBase<T> {
 	/**
 	 * @param  {string} file_path
 	 * @param  {T} data Passing data to constructor and then call save() will create a new file with data already inside it.

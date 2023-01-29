@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export class SimpleFileStorageStream {
+export class SimpleFsStream {
 	file_path: string
 
 	constructor(file_path: string) {

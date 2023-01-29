@@ -1,4 +1,4 @@
-export class SimpleFileStorageMiddleware<T> {
+export class SimpleFsMiddleware<T> {
 	list: ((data: T) => Promise<void> | void)[]
 
 	constructor() {

@@ -1,16 +1,16 @@
-import { SimpleFileStorageMiddleware } from './middleware'
-import { SimpleFileStorageStream } from './stream'
+import { SimpleFsMiddleware } from './middleware'
+import { SimpleFsStream } from './stream'
 
-export abstract class SimpleFileStorageBase<T> {
+export abstract class SimpleFsBase<T> {
 	private data_str: string = ''
-	private stream: SimpleFileStorageStream
+	private stream: SimpleFsStream
 	file_path: string
 	data: T
-	middleware: SimpleFileStorageMiddleware<T>
+	middleware: SimpleFsMiddleware<T>
 
 	constructor(file_path: string, data: T) {
-		this.middleware = new SimpleFileStorageMiddleware<T>()
-		this.stream = new SimpleFileStorageStream(file_path)
+		this.middleware = new SimpleFsMiddleware<T>()
+		this.stream = new SimpleFsStream(file_path)
 		this.data = data
 	}
 
