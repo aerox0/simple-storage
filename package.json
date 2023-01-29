@@ -1,5 +1,5 @@
 {
-	"name": "@aerox0/simple-file-storage",
+	"name": "simple-fs",
 	"version": "1.2.8",
 	"keywords": [
 		"file",
@@ -34,22 +34,21 @@
 	"author": "aerox0",
 	"license": "ISC",
 	"devDependencies": {
-		"@swc/cli": "^0.1.57",
-		"@swc/core": "^1.2.213",
-		"commitizen": "^4.2.4",
-		"concurrently": "^7.2.2",
+		"@swc/cli": "^0.1.59",
+		"@swc/core": "^1.3.30",
+		"commitizen": "^4.3.0",
+		"concurrently": "^7.6.0",
 		"cz-conventional-changelog": "^3.3.0",
-		"nodemon": "^2.0.19",
+		"nodemon": "^2.0.20",
 		"standard-version": "^9.5.0",
-		"typescript": "^4.7.4"
+		"typescript": "^4.9.4"
 	},
-	"dependencies": {},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/aerox0/simple-file-storage.git"
+		"url": "git+https://github.com/aerox0/simple-fs.git"
 	},
 	"bugs": {
-		"url": "https://github.com/aerox0/simple-file-storage/issues"
+		"url": "https://github.com/aerox0/simple-fs/issues"
 	},
-	"homepage": "https://github.com/aerox0/simple-file-storage#readme"
+	"homepage": "https://github.com/aerox0/simple-fs#readme"
 }

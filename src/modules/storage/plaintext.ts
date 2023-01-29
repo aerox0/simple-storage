@@ -1,6 +1,6 @@
-import { SimpleFileStorageBase } from './base'
+import { SimpleFsBase } from './base'
 
-export class SimpleFileStoragePlaintext extends SimpleFileStorageBase<string> {
+export class SimpleFsPlaintext extends SimpleFsBase<string> {
 	data: string
 
 	/**
