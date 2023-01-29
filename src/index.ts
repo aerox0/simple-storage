@@ -3,10 +3,10 @@ export * from './modules/storage/yaml'
 export * from './modules/storage/json'
 export * from './modules/storage/base'
 
-// import { SimpleFileStoragePlaintext } from './modules/storage/plaintext'
+// import { SimpleFsPlaintext } from './modules/storage/plaintext'
 
 // const main = async () => {
-// 	const plaintext = await new SimpleFileStoragePlaintext('public/storage.txt').init()
+// 	const plaintext = await new SimpleFsPlaintext('public/storage.txt').init()
 // 	await plaintext.load()
 
 // 	await plaintext.save()
