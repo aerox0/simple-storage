@@ -1,0 +1,40 @@
+{
+  "name": "@aerox0/simple-storage",
+  "version": "3.0.6",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "description": "This is a simple file storage package that helps you to save data into file in formats like plaintext, json, yaml or even create your own formatter.",
+  "scripts": {
+    "dev": "vitest",
+    "test": "vitest run",
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "lint": "tsc",
+    "release": "bun run build && changeset publish"
+  },
+  "keywords": [
+    "file",
+    "storage",
+    "json",
+    "yaml"
+  ],
+  "author": "aerox0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aerox0/simple-storage.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aerox0/simple-storage/issues"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.0",
+    "@types/bun": "^1.1.2",
+    "tsup": "^6.5.0",
+    "typescript": "^5.4.5",
+    "vitest": "^0.28.4"
+  },
+  "dependencies": {
+    "yaml": "^2.4.2"
+  }
+}
