@@ -1,26 +1,30 @@
-import fs from 'fs'
+import * as fs from "@std/fs";
 
-export class SimpleFsStream {
-	file_path: string
+export class StorageStream {
+	filePath: string;
 
-	constructor(file_path: string) {
-		this.file_path = file_path
+	constructor(filePath: string) {
+		this.filePath = filePath;
 	}
 
-	async init(data: string = ''): Promise<void> {
-		const dir_path = this.file_path.split('/').slice(0, -1).join('/')
-		if (!fs.existsSync(this.file_path)) {
-			await fs.promises.mkdir(dir_path, { recursive: true })
-			await fs.promises.writeFile(this.file_path, data, { flag: 'w' })
-		}
+	async init(data = ""): Promise<void> {
+		const dirPath = this.filePath.split("/").slice(0, -1).join("/");
+		await fs.ensureDir(dirPath);
+
+		const encoder = new TextEncoder();
+		const encoded = encoder.encode(data);
+		await Deno.writeFile(this.filePath, encoded, { create: true });
 	}
 
-	async writeStorageFile(data: string = ''): Promise<any> {
-		await fs.promises.writeFile(this.file_path, data, { flag: 'w' })
-		return
+	async write(data = ""): Promise<void> {
+		const encoder = new TextEncoder();
+		const encoded = encoder.encode(data);
+		return await Deno.writeFile(this.filePath, encoded, { create: true });
 	}
 
-	async readStorageFile(): Promise<string> {
-		return await fs.promises.readFile(this.file_path, { encoding: 'utf8' })
+	async read(): Promise<string> {
+		const decoder = new TextDecoder("utf-8");
+		const data = await Deno.readFile(this.filePath);
+		return decoder.decode(data);
 	}
 }

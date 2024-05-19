@@ -1,59 +1,56 @@
-import { SimpleFsMiddleware } from './middleware'
-import { SimpleFsStream } from './stream'
+import { StorageMiddleware } from "./middleware.ts";
+import { StorageStream } from "./stream.ts";
 
-export abstract class SimpleFsBase<T> {
-	private data_str: string = ''
-	private stream: SimpleFsStream
-	file_path: string
-	data: T
-	middleware: SimpleFsMiddleware<T>
+export abstract class StorageBase<T> {
+	private rawData = "";
+	private stream: StorageStream;
+	filePath: string | undefined;
+	data: T;
+	middleware: StorageMiddleware<T>;
 
-	constructor(file_path: string, data: T) {
-		this.middleware = new SimpleFsMiddleware<T>()
-		this.stream = new SimpleFsStream(file_path)
-		this.data = data
+	constructor(filePath: string, data: T) {
+		this.middleware = new StorageMiddleware<T>();
+		this.stream = new StorageStream(filePath);
+		this.data = data;
 	}
 
 	async init(): Promise<this> {
-		await this.stream.init(await this.stringifyData(this.data))
-		return this
+		await this.validate(this.data);
+		await this.stream.init(await this.stringify(this.data));
+		return this;
 	}
 
-	abstract stringifyData(data: T): Promise<string>
-	abstract parseData(data_str: string): Promise<T>
+	abstract stringify(data: T): Promise<string>;
+	abstract parse(rawData: string): Promise<T>;
 
 	async load(): Promise<void> {
-		await this.load_str()
-		const data = await this.parseData(this.data_str)
+		await this.loadData();
+		const data = await this.parse(this.rawData);
 
-		await this.validate(data)
+		await this.validate(data);
+		this.data = data;
 
-		this.data = data
-
-		return
+		return;
 	}
 
 	async save(): Promise<void> {
-		await this.validate(this.data)
+		await this.validate(this.data);
 
-		this.data_str = await this.stringifyData(this.data)
+		this.rawData = await this.stringify(this.data);
 
-		await this.save_str()
-		return
+		return await this.saveData();
 	}
 
 	async validate(data?: T): Promise<void> {
-		await this.middleware.run(data || this.data)
-		return
+		return await this.middleware.run(data || this.data);
 	}
 
-	private async load_str(): Promise<void> {
-		this.data_str = await this.stream.readStorageFile()
-		return
+	private async loadData(): Promise<void> {
+		this.rawData = await this.stream.read();
+		return;
 	}
 
-	private async save_str(): Promise<void> {
-		await this.stream.writeStorageFile(this.data_str)
-		return
+	private async saveData(): Promise<void> {
+		return await this.stream.write(this.rawData);
 	}
 }

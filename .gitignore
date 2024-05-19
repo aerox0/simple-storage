@@ -2,6 +2,8 @@
 data/
 public/
 dist/
+test.txt
+test.json
 
 # Logs
 logs

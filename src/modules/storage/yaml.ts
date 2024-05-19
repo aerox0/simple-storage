@@ -1,20 +1,20 @@
-import { SimpleFsBase } from './base'
-const yaml = require('yaml')
+import { StorageBase } from "./base.ts";
+import * as yaml from "@std/yaml";
 
-export class SimpleFsYaml<T extends {}> extends SimpleFsBase<T> {
+export class YamlStorage<T extends {}> extends StorageBase<T> {
 	/**
-	 * @param  {string} file_path
+	 * @param  {string} filePath
 	 * @param  {T} data Passing data to constructor and then call save() will create a new file with data already inside it.
 	 */
-	constructor(file_path: string, data = {} as T) {
-		super(file_path, data)
+	constructor(filePath: string, data = {} as T) {
+		super(filePath, data);
 	}
 
-	async parseData(data_str: string): Promise<T> {
-		return yaml.parse(data_str)
+	async parse(rawData: string): Promise<T> {
+		return yaml.parse(rawData) as T;
 	}
 
-	async stringifyData(data: T): Promise<string> {
-		return yaml.stringify(data)
+	async stringify(data: T): Promise<string> {
+		return yaml.stringify(data);
 	}
 }

@@ -1,0 +1,57 @@
+{
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "jsr:@std/assert@^0.225.2": "jsr:@std/assert@0.225.2",
+      "jsr:@std/fs@^0.229.1": "jsr:@std/fs@0.229.1",
+      "jsr:@std/internal@^0.225.1": "jsr:@std/internal@0.225.1",
+      "jsr:@std/path@^0.225.1": "jsr:@std/path@0.225.1",
+      "jsr:@std/yaml@^0.224.0": "jsr:@std/yaml@0.224.0"
+    },
+    "jsr": {
+      "@std/assert@0.225.2": {
+        "integrity": "6fd566c3ea01654d29c2b633298b7fc7599716336233852eb87e9843658fa192",
+        "dependencies": [
+          "jsr:@std/internal@^0.225.1"
+        ]
+      },
+      "@std/fs@0.229.1": {
+        "integrity": "38d3fb31f0ca0a8c1118e039939188f32e291a3f7f17dc0868fec22024bdfadd",
+        "dependencies": [
+          "jsr:@std/assert@^0.225.2",
+          "jsr:@std/path@^0.225.1"
+        ]
+      },
+      "@std/internal@0.225.1": {
+        "integrity": "7d8a812be88c2792f15ab9cf46911e521ccca50435948a8f24df5cefda96bde9"
+      },
+      "@std/path@0.225.1": {
+        "integrity": "8c3220635a73730eb51fe43de9e10b79e2724a5bb8638b9355d35ae012fd9429"
+      },
+      "@std/yaml@0.224.0": {
+        "integrity": "9bd99c6beb4d2db98de81c50853f15e68d4c95f38d737934b0e909bbeeff2b6d"
+      }
+    }
+  },
+  "remote": {},
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/assert@^0.225.2",
+      "jsr:@std/fs@^0.229.1",
+      "jsr:@std/yaml@^0.224.0"
+    ],
+    "packageJson": {
+      "dependencies": [
+        "npm:@swc/cli@^0.1.59",
+        "npm:@swc/core@^1.3.30",
+        "npm:@types/node@^18.11.18",
+        "npm:commitizen@^4.3.0",
+        "npm:concurrently@^7.6.0",
+        "npm:cz-conventional-changelog@^3.3.0",
+        "npm:nodemon@^2.0.20",
+        "npm:standard-version@^9.5.0",
+        "npm:typescript@^4.9.4"
+      ]
+    }
+  }
+}

@@ -1,88 +1,87 @@
 # Description
 
-This is a simple file storage package that helps you to save data into file in formats like plaintext, json, yaml or even create your own formatter. Fully supports typescript.
+This is a simple file storage package that helps you to save data into file in formats like plaintext, json, yaml or even create your own formatter.
 
-To use YAML formatter you have to install "yaml" package.
+## Instrucitons
 
-## How to use
-
-### Installation
+### How to install
 
 ```
 <!-- With npm -->
-npm install simple-fs
+npm install @aerox0/simple-storage
 
-<!-- With yarn -->
-yarn add simple-fs
 ```
 
-### Basic example
+### How to use
+
+Basic Example
 
 ```ts
-// import { SimpleFsPlaintext } from ...
-// import { SimpleFsJson } from ...
-// import { SimpleFsYaml } from ...
+import { JsonStorage } from '@aerox0/simple-storage';
+import { YamlStorage } from '@aerox0/simple-storage';
+import { TextStorage } from '@aerox0/simple-storage';
 
-const yaml = await new SimpleFsYaml('public/storage.yaml', { text: 'Hello' }).init() // init will create path with file that contains text: 'Hello'
-yaml.data.text += ' World'
-// --- OR ---
-const yaml = await new SimpleFsYaml<{ text: string }>('public/storage.yaml').init() // init will create path with empty file
-yaml.data.text = 'Hello World'
+const storage = new JsonStorage("test.json", {
+  name: "John",
+  age: 25,
+});
+// OR you can define the storage using typescript
+const storage = new JsonStorage<{name: string, age: number}>("test.json")
+storage.data = {name: "John", age: 25};
 
-await yaml.save() // will save data into file
-await yaml.load() // will overwrite yaml.data with data from file, you usually calling this before assign any data
+await storage.init(); // will create the file and dir if do not exists with the default content
 
-console.log(yaml.data.text) // Hello World
+storage.data.age = 17;
+await storage.save(); // will save the data into the file
+
+await storage.load(); // will load the data from the file into storage.data
 ```
 
-### Using middleware
+Example Using Middlewares and Validation
 
 ```ts
-const json = await new SimpleFsJson('public/storage.json', { text: '' }).init()
+import { JsonStorage } from '@aerox0/simple-storage';
 
-json.middleware.use((data) => {
- if (data.text.length < 1) throw Error('Data.text can not be empty.')
-}) // you can add as many middlewares as you want
+const storage = new JsonStorage("test.json", {
+  name: "John",
+  age: 25,
+});
 
-await json.validate() // we can validate manually
-await json.validate({ text: "It's OK" }) // or validate custom data before assign them to json.data
+storage.middleware.use((data) => {
+  if (data.age < 18) {
+    throw new Error("You must be at least 18 years old to use this program.");
+  }
+});
 
-await json.save() // save and load automatically validate data before applying next changes
-await json.load()
+// will throw an error if the number is lower than 18
+await storage.init()
+await storage.save()
+await storage.validate()
+await storage.load()
 
-console.log(json.data)
+// also you can validate by passing the data to validate
+await storage.validate({age: 17}) // will validate only the data from argument
+await storage.validate() // will validate data from storage.data
 ```
 
-### Save data with dynamic file path example
+Create your own Storage
 
 ```ts
-const yaml = await new SimpleFsYaml<{ id: number }>('public/storage.yaml').init() // will create empty public/storage.yaml file
+import { StorageBase } from '@aerox0/simple-storage';
 
-for (int i = 10; i <= 10; i++) {
- yaml.file_path = `public/${i}.yaml`
- yaml.data.id = i
- await yaml.init() // will create public/${i}.yaml file with data {id: i}
+class EncryptedJsonStorage extends StorageBase {
+  constructor(filePath: string, data = {} as T) {
+		super(filePath, data);
+	}
+
+	async stringify(data: T): Promise<string> {
+    const te = new TextEncoder();
+		return te.encode(JSON.stringify(data));
+	}
+
+	async parse(rawData: string): Promise<T> {
+    const td = new TextDecoder();
+		return JSON.parse(td.decode(rawData));
+	}
 }
-```
-
-### Create custom formatter
-
-You can add support for any format you want by extending "SimpleFsBase" abstract class.
-
-```ts
-export class StorageXaml<T extends {}> extends SimpleFsBase<T> {
- constructor(file_path: string, data = {} as T) {
-  super(file_path, data)
- }
-
- async stringifyData(data: T): Promise<string> {
-  return XAML.stringify(data)
- }
-
- async parseData(data_str: string): Promise<T> {
-  return XAML.parse(data_str)
- }
-}
-
-const xaml = await new StorageXaml('public/storage.xaml', { text: 'Hello World' }).init()
 ```

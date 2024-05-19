@@ -1,17 +1,17 @@
-export class SimpleFsMiddleware<T> {
-	list: ((data: T) => Promise<void> | void)[]
+export class StorageMiddleware<T> {
+	list: ((data: T) => Promise<void> | void)[];
 
 	constructor() {
-		this.list = []
+		this.list = [];
 	}
 
 	use(middleware: (data: T) => Promise<void> | void): void {
-		this.list.push(middleware)
+		this.list.push(middleware);
 	}
 
 	async run(data: T): Promise<void> {
 		for (const middleware of this.list) {
-			await middleware(data)
+			await middleware(data);
 		}
 	}
 }
