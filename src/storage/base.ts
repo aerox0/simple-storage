@@ -29,16 +29,12 @@ export abstract class StorageBase<T> {
 
 		await this.validate(data);
 		this.data = data;
-
-		return;
 	}
 
 	async save(): Promise<void> {
 		await this.validate(this.data);
-
 		this.rawData = await this.stringify(this.data);
-
-		return await this.saveData();
+		await this.saveData();
 	}
 
 	async validate(data?: T): Promise<void> {
@@ -47,10 +43,9 @@ export abstract class StorageBase<T> {
 
 	private async loadData(): Promise<void> {
 		this.rawData = await this.stream.read();
-		return;
 	}
 
 	private async saveData(): Promise<void> {
-		return await this.stream.write(this.rawData);
+		await this.stream.write(this.rawData);
 	}
 }

@@ -7,7 +7,7 @@ await build({
 	entryPoints: ["./mod.ts"],
 	outDir: "./npm",
 	shims: {
-		deno: true,
+		deno: false,
 	},
 	test: false,
 	package: {
