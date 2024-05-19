@@ -1,5 +1,5 @@
-import { JsonStorage } from "./modules/storage/json.ts";
-import { TextStorage } from "./modules/storage/text.ts";
+import { JsonStorage } from "./storage/json.ts";
+import { TextStorage } from "./storage/text.ts";
 import { assert, assertRejects } from "@std/assert";
 
 Deno.test("TextStorage", async () => {

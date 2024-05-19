@@ -1,4 +1,4 @@
-import * as fs from "@std/fs";
+import * as fs from "jsr:@std/fs@^0.229.1";
 
 export class StorageStream {
 	filePath: string;
