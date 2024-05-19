@@ -1,5 +1,5 @@
 import { StorageBase } from "./base.ts";
-import * as yaml from "jsr:@std/yaml@^0.224.0";
+import * as yaml from "yaml";
 
 export class YamlStorage<T extends {}> extends StorageBase<T> {
 	/**

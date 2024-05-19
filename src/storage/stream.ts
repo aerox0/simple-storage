@@ -1,4 +1,4 @@
-import * as fs from "jsr:@std/fs@^0.229.1";
+import * as fs from "node:fs";
 
 export class StorageStream {
 	filePath: string;
@@ -8,23 +8,19 @@ export class StorageStream {
 	}
 
 	async init(data = ""): Promise<void> {
-		const dirPath = this.filePath.split("/").slice(0, -1).join("/");
-		await fs.ensureDir(dirPath);
-
-		const encoder = new TextEncoder();
-		const encoded = encoder.encode(data);
-		await Deno.writeFile(this.filePath, encoded, { create: true });
+		const dir_path = this.filePath.split("/").slice(0, -1).join("/");
+		if (!fs.existsSync(this.filePath)) {
+			await fs.promises.mkdir(dir_path, { recursive: true });
+			await fs.promises.writeFile(this.filePath, data, { flag: "w" });
+		}
 	}
 
 	async write(data = ""): Promise<void> {
-		const encoder = new TextEncoder();
-		const encoded = encoder.encode(data);
-		return await Deno.writeFile(this.filePath, encoded, { create: true });
+		await fs.promises.writeFile(this.filePath, data, { flag: "w" });
+		return;
 	}
 
 	async read(): Promise<string> {
-		const decoder = new TextDecoder("utf-8");
-		const data = await Deno.readFile(this.filePath);
-		return decoder.decode(data);
+		return await fs.promises.readFile(this.filePath, { encoding: "utf8" });
 	}
 }
