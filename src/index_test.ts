@@ -1,24 +1,25 @@
+import { expect, test } from "bun:test";
+import fsa from "node:fs/promises";
 import { JsonStorage } from "./storage/json.ts";
 import { TextStorage } from "./storage/text.ts";
-import { assert, assertRejects } from "@std/assert";
 
-Deno.test("TextStorage", async () => {
+test("TextStorage", async () => {
 	const storage = new TextStorage("test.txt", "Hello");
 
 	await storage.init();
-	assert(storage.data, "Hello");
+	expect(storage.data).toBe("Hello");
 
 	storage.data = "Hello World!";
 	await storage.save();
-	assert(storage.data, "Hello World!");
+	expect(storage.data).toBe("Hello World!");
 
 	await storage.load();
-	assert(storage.data.includes("Hello World!"));
+	expect(storage.data).toBe("Hello World!");
 
-	await Deno.removeSync("test.txt");
+	await fsa.rm("test.txt");
 });
 
-Deno.test("JsonStorage", async () => {
+test("JsonStorage", async () => {
 	const storage = new JsonStorage("test.json", {
 		name: "John",
 		age: 25,
@@ -26,12 +27,12 @@ Deno.test("JsonStorage", async () => {
 	await storage.init();
 	await storage.save();
 	await storage.load();
-	assert(storage.data.name === "John");
-	assert(storage.data.age === 25);
-	await Deno.remove("test.json");
+	expect(storage.data.name).toBe("John");
+	expect(storage.data.age).toBe(25);
+	await fsa.rm("test.json");
 });
 
-Deno.test("JsonStorage Middleware", async () => {
+test("JsonStorage Middleware", async () => {
 	const storage = new JsonStorage("test.json", {
 		name: "John",
 		age: 25,
@@ -42,12 +43,12 @@ Deno.test("JsonStorage Middleware", async () => {
 	await storage.init();
 	await storage.save();
 	await storage.load();
-	assert(storage.data.name === "Jane");
-	assert(storage.data.age === 25);
-	await Deno.remove("test.json");
+	expect(storage.data.name).toBe("Jane");
+	expect(storage.data.age).toBe(25);
+	await fsa.rm("test.json");
 });
 
-Deno.test("JsonStorage Validation", async () => {
+test("JsonStorage Validation", async () => {
 	const storage = new JsonStorage("test.json", {
 		name: "John",
 		age: 17,
@@ -59,5 +60,5 @@ Deno.test("JsonStorage Validation", async () => {
 		}
 	});
 
-	await assertRejects(async () => await storage.init());
+	expect(async () => await storage.init()).toThrow();
 });

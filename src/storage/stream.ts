@@ -1,4 +1,6 @@
 import * as fs from "node:fs";
+import * as fsa from "node:fs/promises";
+import path from "node:path";
 
 export class StorageStream {
 	filePath: string;
@@ -8,19 +10,19 @@ export class StorageStream {
 	}
 
 	async init(data = ""): Promise<void> {
-		const dir_path = this.filePath.split("/").slice(0, -1).join("/");
+		const dir_path = path.dirname(this.filePath);
 		if (!fs.existsSync(this.filePath)) {
-			await fs.promises.mkdir(dir_path, { recursive: true });
-			await fs.promises.writeFile(this.filePath, data, { flag: "w" });
+			await fsa.mkdir(dir_path, { recursive: true });
+			await fsa.writeFile(this.filePath, data, { flag: "w" });
 		}
 	}
 
 	async write(data = ""): Promise<void> {
-		await fs.promises.writeFile(this.filePath, data, { flag: "w" });
+		await fsa.writeFile(this.filePath, data, { flag: "w" });
 		return;
 	}
 
 	async read(): Promise<string> {
-		return await fs.promises.readFile(this.filePath, { encoding: "utf8" });
+		return await fsa.readFile(this.filePath, { encoding: "utf8" });
 	}
 }

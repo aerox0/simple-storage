@@ -1,0 +1,8 @@
+{
+	"name": "@aerox0/simple-storage",
+	"version": "3.0.5",
+	"exports": "./src/index.ts",
+	"imports": {
+		"yaml": "npm:yaml@^2.4.2"
+	}
+}
