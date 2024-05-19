@@ -1,6 +1,6 @@
 {
   "name": "@aerox0/simple-storage",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "tasks": {
     "test": "deno test ./src/main_test.ts -A",
     "npm:build": "deno run -A scripts/build_npm.ts"
