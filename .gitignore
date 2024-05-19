@@ -4,6 +4,7 @@ public/
 dist/
 test.txt
 test.json
+npm/
 
 # Logs
 logs
