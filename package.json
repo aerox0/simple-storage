@@ -1,10 +1,10 @@
 {
   "name": "@aerox0/simple-storage",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "description": "A simple API for creating a type-safe fetcher with Zod",
+  "description": "This is a simple file storage package that helps you to save data into file in formats like plaintext, json, yaml or even create your own formatter.",
   "scripts": {
     "dev": "vitest",
     "test": "vitest run",
